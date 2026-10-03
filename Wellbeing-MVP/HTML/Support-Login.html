@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student Wellbeing Support — Demo sign in</title>
+        <link rel="stylesheet" href="../CSS/support-login.css" />
+        <style>
+            .auth-brand .auth-logo {
+                background: linear-gradient(180deg, #f9fafc, #ffffff);
+                width: 160px; /* 稍微放大，看起来更平衡 */
+                max-width: 70%;
+                height: auto;
+                display: block; /* 居中对齐 */
+                margin: 0 auto 1rem; /* 下方留点间距 */
+                border: none; /* 去掉可能的边框 */
+                box-shadow: none; /* 去掉阴影 */
+                background: none; /* 避免白底或灰底 */
+                border-radius: 0; /* 保持原始形状 */
+            }
+
+            /* 如果外层容器也有边框或阴影，可以进一步柔化： */
+            .auth-card {
+                border: none;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* 柔和阴影，可选 */
+                background: #fff; /* 保证背景干净 */
+            }
+
+            .auth-brand {
+                text-align: center; /* 标题、说明也居中 */
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="site-mainnav" aria-label="Main navigation">
+            <a href="./Home.html">Home</a><a href="./Services-Explore.html">Services</a>
+            <a href="./Self-help.html">Self-help</a><a href="./Index.html">Chat</a>
+        </nav>
+        <section class="auth-card">
+            <aside class="auth-brand">
+                <!-- Replace src with your local logo if needed -->
+                <img
+                    class="auth-logo"
+                    src="../image/Logo.png"
+                    alt="UQ Support Logo"
+                />
+                <h1>UQ Mental Guidance</h1>
+                <p>Compassionate, confidential student support</p>
+                <ul class="auth-highlights">
+                    <li>Browse prototype service examples</li>
+                    <li>Try self-help exercises</li>
+                    <li>See guidance for finding support</li>
+                </ul>
+            </aside>
+
+            <form id="loginForm">
+                <h2>Demo sign in</h2><p>This prototype does not create or verify accounts. Continue as guest to explore.</p>
+
+                <label for="email">UQ Email</label>
+                <div class="input-wrapper">
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="s1234567@student.uq.edu.au"
+                        required
+                    />
+                </div>
+
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="••••••••"
+                        required
+                        minlength="6"
+                    />
+                </div>
+
+                <button type="submit" class="primary-btn">Sign in</button>
+                <div class="divider"><span>or</span></div>
+                <button type="button" id="guestBtn" class="secondary-btn">
+                    Continue as Guest
+                </button>
+            </form>
+        </section>
+
+        <script src="../JS/support-login.js"></script>
+    </body>
+</html>

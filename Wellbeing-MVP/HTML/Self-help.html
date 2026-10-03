@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+        />
+        <title>UQ Mental Guidance — Self-Help Tools</title>
+        <!-- 复用全站的柔和渐变、变量、按钮、卡片、布局等样式 -->
+        <link rel="stylesheet" href="../CSS/services-explore.css" />
+    </head>
+    <body>
+        <!-- ========= BEGIN: Global Header + Main Nav (paste at top of <body>) ========= -->
+        <style>
+            :root {
+                --indigo: #2563eb;
+                --violet: #9333ea;
+                --text: #030213;
+                --muted: #717182;
+                --border: #e5e7eb;
+                --bgsoft: #f3f3f5;
+            }
+            /* 顶部品牌栏（避免与你现有 .topbar 命名冲突，使用独立类名） */
+            .site-topbar {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1rem 1.25rem;
+                background: #fff;
+                border-bottom: 1px solid var(--border);
+            }
+            .site-brand {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .site-logo {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                object-fit: cover;
+            }
+            .site-title {
+                margin: 0;
+                font-size: 1.1rem;
+                color: var(--text);
+                font-weight: 800;
+            }
+            .site-sub {
+                margin: 0.15rem 0 0;
+                color: var(--muted);
+                font-size: 0.9rem;
+            }
+            .site-userbtn {
+                background: 0 0;
+                border: 0;
+                cursor: pointer;
+                padding: 0.35rem;
+                border-radius: 9999px;
+            }
+            .site-userbtn:hover {
+                background: var(--bgsoft);
+            }
+            .site-userbtn svg {
+                width: 26px;
+                height: 26px;
+                stroke: var(--text);
+            }
+
+            /* 第二行主导航 */
+            .site-mainnav {
+                position: sticky;
+                top: 64px;
+                z-index: 99; /* 紧跟在顶部栏下方 */
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                background: #fff;
+                border-bottom: 1px solid var(--border);
+                padding: 0.7rem 0.75rem;
+            }
+            .site-mainnav a {
+                text-decoration: none;
+                font-weight: 700;
+                color: var(--text);
+                transition: color 0.15s ease;
+            }
+            .site-mainnav a:hover {
+                color: var(--violet);
+            }
+            .site-mainnav a.is-active {
+                color: var(--indigo);
+            }
+
+            /* 小屏优化 */
+            @media (max-width: 640px) {
+                .site-topbar {
+                    padding: 0.8rem 0.9rem;
+                }
+                .site-mainnav {
+                    gap: 1.25rem;
+                    padding: 0.6rem 0.5rem;
+                }
+            }
+        </style>
+
+        <header class="site-topbar">
+            <div class="site-brand">
+                <img
+                    src="../image/Logo.png"
+                    alt="UQ Support Logo"
+                    class="site-logo"
+                />
+                <div>
+                    <h1 class="site-title">UQ Mental Guidance</h1>
+                    <p class="site-sub">Your well-being companion</p>
+                </div>
+            </div>
+            <!-- 用户按钮：点击去登录页（login页本身不要粘贴本模板） -->
+            <button
+                class="site-userbtn"
+                aria-label="Sign in / Profile"
+                onclick="location.href='./Support-Login.html'"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="1.7"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0v.75H4.5v-.75z"
+                    />
+                </svg>
+            </button>
+        </header>
+
+        <nav class="site-mainnav" id="siteMainNav">
+            <a href="./Home.html" data-match="home.html">Home</a>
+            <a href="./Services-Explore.html" data-match="services-explore.html"
+                >Services</a
+            >
+            <a href="./Self-help.html" data-match="self-help.html">Self-help</a>
+            <a href="./Index.html" data-match="index.html">Chat</a>
+        </nav>
+
+        <script>
+            (function () {
+                // 根据当前 URL 自动高亮
+                var path = (
+                    location.pathname.split("/").pop() || ""
+                ).toLowerCase();
+                // 兼容没有 Home.html 时，把其它页面都当作“非 Home”，仅当匹配到 home.html 才点亮 Home
+                var links = document.querySelectorAll("#siteMainNav a");
+                var matched = false;
+                links.forEach(function (a) {
+                    var key = (
+                        a.getAttribute("data-match") || ""
+                    ).toLowerCase();
+                    if (key && path.indexOf(key) !== -1) {
+                        a.classList.add("is-active");
+                        a.setAttribute("aria-current", "page");
+                        matched = true;
+                    } else {
+                        a.classList.remove("is-active");
+                        a.removeAttribute("aria-current");
+                    }
+                });
+                // 若未匹配任何具体页，默认高亮 Home（例如站点根路径或自定义首页）
+                if (!matched) {
+                    var home = document.querySelector(
+                        '#siteMainNav a[data-match="home.html"]'
+                    );
+                    if (home) home.classList.add("is-active");
+                }
+            })();
+        </script>
+        <!-- ========= END: Global Header + Main Nav ========= -->
+
+        <!-- 页面主体布局：左侧为功能切换，右侧为内容区（与 services-explore 的两栏布局一致） -->
+        <main class="layout" role="main">
+            <!-- 左侧：功能切换区（复用 chips/按钮样式） -->
+            <aside class="filters" aria-labelledby="selfhelp-title">
+                <h2 id="selfhelp-title">Tools</h2>
+
+                <!-- 功能选项：Mindfulness / Music / Podcasts / Journaling -->
+                <div class="filter-group">
+                    <span class="filter-label">Choose a tool</span>
+                    <div
+                        class="chips"
+                        id="toolTabs"
+                        role="tablist"
+                        aria-label="Self-help tools"
+                    >
+                        <button
+                            class="chip active"
+                            role="tab"
+                            aria-selected="true"
+                            aria-controls="panel-mindfulness"
+                            id="tab-mindfulness"
+                        >
+                            🧘 Mindfulness
+                        </button>
+                        <button
+                            class="chip"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="panel-music"
+                            id="tab-music"
+                        >
+                            🎵 Relaxing Music
+                        </button>
+                        <button
+                            class="chip"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="panel-podcasts"
+                            id="tab-podcasts"
+                        >
+                            🎙️ Podcasts
+                        </button>
+                        <button
+                            class="chip"
+                            role="tab"
+                            aria-selected="false"
+                            aria-controls="panel-journaling"
+                            id="tab-journaling"
+                        >
+                            ✍️ Journaling
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 正念可选时长预设 -->
+                <div class="filter-group" aria-labelledby="duration-title">
+                    <span class="filter-label" id="duration-title"
+                        >Mindfulness duration</span
+                    >
+                    <div class="chips" id="durationChips">
+                        <button class="chip active" data-minutes="1">
+                            1 min
+                        </button>
+                        <button class="chip" data-minutes="3">3 min</button>
+                        <button class="chip" data-minutes="5">5 min</button>
+                    </div>
+                </div>
+
+                <!-- 统一操作按钮（不同模块可按需复用） -->
+                <div class="filter-actions">
+                    <button type="button" id="primaryAction" class="primary-btn">
+                        Start
+                    </button>
+                    <button type="button" id="secondaryAction" class="secondary-btn">
+                        Pause
+                    </button>
+                </div>
+
+                <p id="toolStatus" class="interaction-status" role="status" aria-live="polite"></p>
+                <!-- 免责声明（延续你站点的提示语气） -->
+                <div class="legend" role="note" aria-label="Safety note">
+                    <h3>Note</h3>
+                    <ul>
+                        <li>
+                            These tools are for self-care practice, not clinical
+                            treatment.
+                        </li>
+                        <li>
+                            Need urgent help? Call Lifeline 13 11 14 or UQ
+                            Well-being.
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- 右侧：内容展示区（与 services-explore 的 content 容器对齐） -->
+            <section class="content" aria-live="polite">
+                <!-- 上半区：主内容（呼吸动画/音频/日记） -->
+                <div
+                    class="map-wrap"
+                    style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                >
+                    <!-- Mindfulness 面板 -->
+                    <div
+                        id="panel-mindfulness"
+                        role="tabpanel"
+                        aria-labelledby="tab-mindfulness"
+                        style="width: 100%; padding: 1rem"
+                    >
+                        <h2>Mindfulness — Guided Breathing</h2>
+                        <p class="subtitle">
+                            Follow the rhythm: inhale — hold — exhale.
+                        </p>
+
+                        <!-- 呼吸引导可视容器（占位） -->
+                        <div
+                            id="breathingVisual"
+                            style="
+                                width: 220px;
+                                height: 220px;
+                                border-radius: 50%;
+                                border: 1px solid var(--border);
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin: 1rem auto;
+                                background: #fff;
+                            "
+                        >
+                            <span id="breathingLabel" class="meta" role="status" aria-live="polite">Ready</span>
+                        </div>
+
+                        <!-- 文本引导 -->
+                        <ul class="cards" style="grid-template-columns: 1fr">
+                            <li class="card">
+                                <h3>How it works</h3>
+                                <p class="meta">
+                                    Breathe in for 4 · Hold for 4 · Breathe out
+                                    for 6. Repeat until the timer completes.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Music 面板 -->
+                    <div
+                        id="panel-music"
+                        role="tabpanel"
+                        aria-labelledby="tab-music"
+                        style="width: 100%; padding: 1rem"
+                    >
+                        <h2>Relaxing Music</h2>
+                        <p class="subtitle">
+                            Pick a track and focus softly on the sound.
+                        </p>
+
+                        <!-- Music 面板 -->
+                        <ul class="cards" id="musicList">
+                            <li class="card">
+                                <h3>Ocean Waves</h3>
+                                <p class="meta">2:30 · ambient</p>
+                                <audio
+                                    controls
+                                    preload="metadata"
+                                    style="width: 100%"
+                                >
+                                    <source
+                                        src="../audio/audio.mp3"
+                                        type="audio/mpeg"
+                                    />
+
+                                    />
+                                </audio>
+                            </li>
+                            <li class="card">
+                                <h3>Soft Piano</h3>
+                                <p class="meta">3:10 · piano</p>
+                                <audio
+                                    controls
+                                    preload="metadata"
+                                    style="width: 100%"
+                                >
+                                    <source
+                                        src="../audio/audio.mp3"
+                                        type="audio/mpeg"
+                                    />
+
+                                    />
+                                </audio>
+                            </li>
+                            <li class="card">
+                                <h3>Forest Night</h3>
+                                <p class="meta">2:45 · nature</p>
+                                <audio
+                                    controls
+                                    preload="metadata"
+                                    style="width: 100%"
+                                >
+                                    <source
+                                        src="../audio/audio.mp3"
+                                        type="audio/mpeg"
+                                    />
+
+                                    />
+                                </audio>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Podcasts 面板 -->
+                    <div
+                        id="panel-podcasts"
+                        role="tabpanel"
+                        aria-labelledby="tab-podcasts"
+                        style="width: 100%; padding: 1rem"
+                    >
+                        <h2>Well-being Podcasts</h2>
+                        <p class="subtitle">
+                            Short episodes to learn techniques and perspectives.
+                        </p>
+
+                        <!-- Podcasts 面板 -->
+                        <ul class="cards" id="podcastList">
+                            <li class="card">
+                                <h3>Mini-Guide: Grounding (5′)</h3>
+                                <p class="meta">
+                                    A quick 5-4-3-2-1 grounding walk-through.
+                                </p>
+                                <audio
+                                    controls
+                                    preload="metadata"
+                                    style="width: 100%"
+                                >
+                                    <source
+                                        src="../audio/audio2.mp3"
+                                        type="audio/mpeg"
+                                    />
+
+                                    />
+                                </audio>
+                            </li>
+                            <li class="card">
+                                <h3>Study Stress Reset (7′)</h3>
+                                <p class="meta">
+                                    A brief body scan for exam weeks.
+                                </p>
+                                <audio
+                                    controls
+                                    preload="metadata"
+                                    style="width: 100%"
+                                >
+                                    <source
+                                        src="../audio/audio2.mp3"
+                                        type="audio/mpeg"
+                                    />
+
+                                    />
+                                </audio>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Journaling 面板 -->
+                    <div
+                        id="panel-journaling"
+                        role="tabpanel"
+                        aria-labelledby="tab-journaling"
+                        style="width: 100%; padding: 1rem"
+                    >
+                        <h2>Journaling</h2>
+                        <p class="subtitle">
+                            Write privately on this device. Notes stay in this browser and are not uploaded.
+                        </p>
+
+                        <ul class="cards" style="grid-template-columns: 1fr">
+                            <li class="card">
+                                <h3>Today’s entry</h3>
+                                <div
+                                    class="meta"
+                                    style="margin: 0.25rem 0 0.5rem"
+                                >
+                                    Prompt: What’s one thing I can control right
+                                    now?
+                                </div>
+                                <label for="journalInput">Your note</label>
+                                <textarea
+                                    id="journalInput"
+                                    rows="6"
+                                    style="
+                                        width: 100%;
+                                        padding: 0.75rem;
+                                        border: 1px solid var(--border);
+                                        border-radius: 10px;
+                                        background: #fafafa;
+                                    "
+                                ></textarea>
+                                <p id="journalStatus" class="interaction-status" role="status" aria-live="polite"></p>
+                                <div
+                                    style="
+                                        display: flex;
+                                        gap: 0.5rem;
+                                        margin-top: 0.75rem;
+                                    "
+                                >
+                                    <button
+                                        id="saveJournalBtn"
+                                        class="primary-btn"
+                                        style="flex: 1"
+                                    >
+                                        Save Entry
+                                    </button>
+                                    <button
+                                        id="clearJournalBtn"
+                                        class="secondary-btn"
+                                        style="flex: 1"
+                                    >
+                                        Clear
+                                    </button>
+                                </div>
+                            </li>
+                            <li class="card">
+                                <h3>Previous entries</h3>
+                                <ul
+                                    id="journalList"
+                                    class="journal-list"
+                                    aria-live="polite"
+                                ></ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 下半区：Tips（随主题切换） -->
+                <div class="results">
+                    <div class="results-head">
+                        <h2 id="tipsTitle">Tips</h2>
+                        <span id="tipsCount" class="meta"
+                            >Short, practical guidance</span
+                        >
+                    </div>
+                    <ul class="cards" id="tipsList"></ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>
+                Demo only. For real support, please contact UQ Well-being or
+                Lifeline 13 11 14.
+            </p>
+        </footer>
+
+        <script src="../JS/self-help.js"></script>
+    </body>
+</html>

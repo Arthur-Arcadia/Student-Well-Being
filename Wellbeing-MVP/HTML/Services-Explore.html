@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+        />
+        <title>UQ Mental Guidance — Services Explorer</title>
+        <link rel="stylesheet" href="../CSS/services-explore.css" />
+    </head>
+    <body>
+        <header class="site-topbar">
+            <div class="site-brand">
+                <img
+                    src="../image/Logo.png"
+                    alt="UQ Support Logo"
+                    class="site-logo"
+                />
+                <div>
+                    <h1 class="site-title">UQ Mental Guidance</h1>
+                    <p class="site-sub">Your well-being companion</p>
+                </div>
+            </div>
+            
+            <button
+                class="site-userbtn"
+                aria-label="Sign in / Profile"
+                onclick="location.href='./Support-Login.html'"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="1.7"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0v.75H4.5v-.75z"
+                    />
+                </svg>
+            </button>
+        </header>
+
+        <nav class="site-mainnav" id="siteMainNav">
+            <a href="./Home.html" data-match="home.html">Home</a>
+            <a href="./Services-Explore.html" data-match="services-explore.html"
+                >Services</a
+            >
+            <a href="./Self-help.html" data-match="self-help.html">Self-help</a>
+            <a href="./Index.html" data-match="index.html">Chat</a>
+        </nav>
+
+        <script>
+            (function () {
+                
+                var path = (
+                    location.pathname.split("/").pop() || ""
+                ).toLowerCase();
+                
+                var links = document.querySelectorAll("#siteMainNav a");
+                var matched = false;
+                links.forEach(function (a) {
+                    var key = (
+                        a.getAttribute("data-match") || ""
+                    ).toLowerCase();
+                    if (key && path.indexOf(key) !== -1) {
+                        a.classList.add("is-active");
+                        a.setAttribute("aria-current", "page");
+                        matched = true;
+                    } else {
+                        a.classList.remove("is-active");
+                        a.removeAttribute("aria-current");
+                    }
+                });
+                
+                if (!matched) {
+                    var home = document.querySelector(
+                        '#siteMainNav a[data-match="home.html"]'
+                    );
+                    if (home) home.classList.add("is-active");
+                }
+            })();
+        </script>
+        
+
+        <main class="layout">
+            
+            <aside class="filters" aria-labelledby="filters-title">
+                <h2 id="filters-title">Filters</h2>
+
+                <div class="filter-group">
+                    <label for="locationSelect">Location</label>
+                    <select id="locationSelect">
+                        <option value="all">All locations</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Service content</span>
+                    <div class="chips" id="typeChips">
+                        
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Example price range (AUD)</span>
+                    <div class="price-row">
+                        <input
+                            type="number"
+                            id="minPrice"
+                            placeholder="Min"
+                            min="0"
+                            step="5"
+                        />
+                        <span class="dash">—</span>
+                        <input
+                            type="number"
+                            id="maxPrice"
+                            placeholder="Max"
+                            min="0"
+                            step="5"
+                        />
+                    </div>
+                    <div class="price-presets">
+                        <button class="chip" data-price="0-0">$0</button>
+                        <button class="chip" data-price="1-50">$1–50</button>
+                        <button class="chip" data-price="51-100">
+                            $51-100
+                        </button>
+                        <button class="chip" data-price="101-999">$101+</button>
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button id="applyBtn" class="primary-btn">
+                        Apply filters
+                    </button>
+                    <button id="resetBtn" class="secondary-btn">Reset</button>
+                </div>
+
+                <div class="legend">
+                    <h3>Legend</h3>
+                    <ul>
+                        <li>
+                            <span class="dot dot-service"></span> Service
+                            location
+                        </li>
+                        <li>
+                            <span class="dot dot-user"></span> Your location
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            
+            <section class="content">
+                <div class="map-wrap">
+                    <div
+                        id="map"
+                        aria-label="Map showing service locations"
+                    ></div>
+                </div>
+
+                <div class="results" aria-live="polite">
+                    <div class="results-head">
+                        <h2>Matching Services</h2>
+                        <span id="resultsCount">0 results</span>
+                    </div>
+                    <ul id="resultsList" class="cards">
+                        
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Example listings and prices only. Verify details with providers; no real booking is connected.</p>
+        </footer>
+
+        
+        <script src="../JS/config.js"></script>
+        <script src="../JS/services-explore.js"></script>
+    </body>
+</html>

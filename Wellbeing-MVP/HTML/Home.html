@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student Wellbeing Support — Home</title>
+        <link rel="stylesheet" href="../CSS/home.css" />
+        <style>
+            :root {
+                --indigo: #2563eb;
+                --violet: #9333ea;
+                --text: #030213;
+                --muted: #717182;
+                --bg-soft: #f3f3f5;
+                --border: #e5e7eb;
+            }
+
+            body {
+                background: linear-gradient(
+                    to bottom right,
+                    #eff6ff,
+                    #faf5ff,
+                    #fdf2f8
+                );
+                margin: 0;
+                font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+                    sans-serif;
+                color: var(--text);
+            }
+
+            /* 顶部栏 */
+            .topbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1rem 1.5rem;
+                background: #fff;
+                border-bottom: 1px solid var(--border);
+                position: sticky;
+                top: 0;
+                z-index: 50;
+            }
+
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .logo {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                object-fit: cover;
+            }
+
+            .titles h1 {
+                font-size: 1.1rem;
+                margin: 0;
+                color: var(--text);
+            }
+
+            .subtitle {
+                margin: 0.15rem 0 0;
+                color: var(--muted);
+                font-size: 0.9rem;
+            }
+
+            .user-btn {
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0.3rem;
+                border-radius: 50%;
+                transition: background 0.2s;
+            }
+
+            .user-btn:hover {
+                background: var(--bg-soft);
+            }
+
+            .user-btn svg {
+                width: 28px;
+                height: 28px;
+                stroke: var(--text);
+            }
+
+            /* 第二行导航 */
+            .site-mainnav {
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                background: #fff;
+                border-bottom: 1px solid var(--border);
+                padding: 0.75rem 0;
+            }
+
+            .site-mainnav a {
+                text-decoration: none;
+                color: var(--text);
+                font-weight: 600;
+                transition: color 0.2s ease;
+            }
+
+            .site-mainnav a:hover {
+                color: var(--violet);
+            }
+
+            .site-mainnav a.is-active {
+                color: var(--indigo);
+            }
+
+            /* 主体全屏布局 */
+            .hero-image {
+                width: 100%;
+                height: 480px;
+                overflow: hidden;
+            }
+
+            .hero-banner {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .hero-content {
+                max-width: 900px;
+                margin: 3rem auto;
+                text-align: center;
+                padding: 0 1.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(1.8rem, 3vw, 2.4rem);
+                color: #030213;
+                margin-bottom: 1rem;
+            }
+
+            .hero-content p {
+                color: #717182;
+                font-size: 1.05rem;
+                line-height: 1.6;
+                margin-bottom: 2rem;
+            }
+
+            .services {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 1.5rem;
+                padding: 0 2rem 3rem;
+                max-width: 1100px;
+                margin: 0 auto;
+            }
+
+            .service {
+                background: #fff;
+                border: 1px solid #e5e7eb;
+                border-radius: 12px;
+                padding: 1.5rem;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                cursor: pointer;
+                text-decoration: none;
+                color: var(--text);
+            }
+
+            .service:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.15);
+            }
+
+            .service h3 {
+                margin: 0 0 0.5rem;
+                font-size: 1.1rem;
+                color: #030213;
+            }
+
+            .service p {
+                color: #717182;
+                line-height: 1.5;
+                margin: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- 顶部 -->
+        <header class="topbar">
+            <div class="brand">
+                <img
+                    src="../image/Logo.png"
+                    alt="UQ Support Logo"
+                    class="logo"
+                />
+                <div class="titles">
+                    <h1>Student Wellbeing Support</h1>
+                    <p class="subtitle">Your well-being companion</p>
+                </div>
+            </div>
+            <button
+                class="user-btn"
+                onclick="location.href='./Support-Login.html'"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.7"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0v.75H4.5v-.75z"
+                    />
+                </svg>
+            </button>
+        </header>
+
+        <!-- 主导航 -->
+        <nav class="site-mainnav" aria-label="Main navigation">
+            <a href="./Home.html" data-match="home.html">Home</a>
+            <a href="./Services-Explore.html">Services</a>
+            <a href="./Self-help.html">Self-help</a>
+            <a href="./Index.html">Chat</a>
+        </nav>
+
+        <!-- 全屏主体 -->
+        <div class="hero-image">
+            <img
+                src="../image/home.png"
+                alt="Student Wellbeing Support Main Banner"
+                class="hero-banner"
+            />
+        </div>
+
+        <div class="hero-content">
+            <h1>Welcome to Student Wellbeing Support</h1>
+            <p>This prototype brings together self-help tools and example service information.</p>
+        </div>
+
+        <div class="services">
+            <a href="./Services-Explore.html" class="service">
+                <h3>🎯 Service Directory</h3>
+                <p>
+                    Browse example support options and see how service details could be compared.
+                </p>
+            </a>
+            <a href="./Self-help.html" class="service">
+                <h3>🧘 Self-help Tools</h3>
+                <p>
+                    Relax and recharge with mindfulness, journaling, and audio
+                    tools.
+                </p>
+            </a>
+            <a href="./Index.html" class="service">
+                <h3>💬 Chat Assistant</h3>
+                <p>Use keyword-based prompts to find prototype guidance and relevant sections.</p>
+            </a>
+        </div>
+        <script>
+            (() => {
+                const page = (location.pathname.split("/").pop() || "Home.html").toLowerCase();
+                document.querySelectorAll(".site-mainnav a").forEach(link => {
+                    const active = link.getAttribute("href").toLowerCase().endsWith(page);
+                    link.classList.toggle("is-active", active);
+                    if (active) link.setAttribute("aria-current", "page");
+                    else link.removeAttribute("aria-current");
+                });
+            })();
+        </script>
+    </body>
+</html>

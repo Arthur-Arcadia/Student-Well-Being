@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <title>UQ Mental Guidance - Chat Assistant</title>
+        <link rel="stylesheet" href="../CSS/Style.css" />
+    </head>
+
+    <body>
+        <!-- ========= BEGIN: Global Header + Main Nav (paste at top of <body>) ========= -->
+        <style>
+            :root {
+                --indigo: #2563eb;
+                --violet: #9333ea;
+                --text: #030213;
+                --muted: #717182;
+                --border: #e5e7eb;
+                --bgsoft: #f3f3f5;
+            }
+            /* 顶部品牌栏（避免与你现有 .topbar 命名冲突，使用独立类名） */
+            .site-topbar {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1rem 1.25rem;
+                background: #fff;
+                border-bottom: 1px solid var(--border);
+            }
+            .site-brand {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .site-logo {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                object-fit: cover;
+            }
+            .site-title {
+                margin: 0;
+                font-size: 1.1rem;
+                color: var(--text);
+                font-weight: 800;
+            }
+            .site-sub {
+                margin: 0.15rem 0 0;
+                color: var(--muted);
+                font-size: 0.9rem;
+            }
+            .site-userbtn {
+                background: 0 0;
+                border: 0;
+                cursor: pointer;
+                padding: 0.35rem;
+                border-radius: 9999px;
+            }
+            .site-userbtn:hover {
+                background: var(--bgsoft);
+            }
+            .site-userbtn svg {
+                width: 26px;
+                height: 26px;
+                stroke: var(--text);
+            }
+
+            /* 第二行主导航 */
+            .site-mainnav {
+                position: sticky;
+                top: 64px;
+                z-index: 99; /* 紧跟在顶部栏下方 */
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                background: #fff;
+                border-bottom: 1px solid var(--border);
+                padding: 0.7rem 0.75rem;
+            }
+            .site-mainnav a {
+                text-decoration: none;
+                font-weight: 700;
+                color: var(--text);
+                transition: color 0.15s ease;
+            }
+            .site-mainnav a:hover {
+                color: var(--violet);
+            }
+            .site-mainnav a.is-active {
+                color: var(--indigo);
+            }
+
+            /* 小屏优化 */
+            @media (max-width: 640px) {
+                .site-topbar {
+                    padding: 0.8rem 0.9rem;
+                }
+                .site-mainnav {
+                    gap: 1.25rem;
+                    padding: 0.6rem 0.5rem;
+                }
+            }
+        </style>
+
+        <header class="site-topbar">
+            <div class="site-brand">
+                <img
+                    src="../image/Logo.png"
+                    alt="UQ Support Logo"
+                    class="site-logo"
+                />
+                <div>
+                    <h1 class="site-title">UQ Mental Guidance</h1>
+                    <p class="site-sub">Your well-being companion</p>
+                </div>
+            </div>
+            <!-- 用户按钮：点击去登录页（login页本身不要粘贴本模板） -->
+            <button
+                class="site-userbtn"
+                aria-label="Sign in / Profile"
+                onclick="location.href='./Support-Login.html'"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="1.7"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0v.75H4.5v-.75z"
+                    />
+                </svg>
+            </button>
+        </header>
+
+        <nav class="site-mainnav" id="siteMainNav">
+            <a href="./Home.html" data-match="home.html">Home</a>
+            <a href="./Services-Explore.html" data-match="services-explore.html"
+                >Services</a
+            >
+            <a href="./Self-help.html" data-match="self-help.html">Self-help</a>
+            <a href="./Index.html" data-match="index.html">Chat</a>
+        </nav>
+
+        <script>
+            (function () {
+                // 根据当前 URL 自动高亮
+                var path = (
+                    location.pathname.split("/").pop() || ""
+                ).toLowerCase();
+                // 兼容没有 Home.html 时，把其它页面都当作“非 Home”，仅当匹配到 home.html 才点亮 Home
+                var links = document.querySelectorAll("#siteMainNav a");
+                var matched = false;
+                links.forEach(function (a) {
+                    var key = (
+                        a.getAttribute("data-match") || ""
+                    ).toLowerCase();
+                    if (key && path.indexOf(key) !== -1) {
+                        a.classList.add("is-active");
+                        a.setAttribute("aria-current", "page");
+                        matched = true;
+                    } else {
+                        a.classList.remove("is-active");
+                        a.removeAttribute("aria-current");
+                    }
+                });
+                // 若未匹配任何具体页，默认高亮 Home（例如站点根路径或自定义首页）
+                if (!matched) {
+                    var home = document.querySelector(
+                        '#siteMainNav a[data-match="home.html"]'
+                    );
+                    if (home) home.classList.add("is-active");
+                }
+            })();
+        </script>
+        <!-- ========= END: Global Header + Main Nav ========= -->
+
+        <div class="app-container">
+            <div class="chat-card">
+                <!-- Header -->
+                <div class="header">
+                    <div class="header-content">
+                        <div class="bot-icon-container">
+                            <svg
+                                class="bot-icon"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <rect
+                                    x="3"
+                                    y="11"
+                                    width="18"
+                                    height="10"
+                                    rx="2"
+                                ></rect>
+                                <circle cx="12" cy="5" r="2"></circle>
+                                <path d="M12 7v4"></path>
+                                <line x1="8" y1="16" x2="8" y2="16"></line>
+                                <line x1="16" y1="16" x2="16" y2="16"></line>
+                            </svg>
+                        </div>
+                        <div class="header-text">
+                            <h1>UQ Mental Guidance</h1>
+                            <p class="subtitle">Keyword-based guidance demo</p>
+                        </div>
+                    </div>
+                    <button class="menu-button" aria-label="Menu">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Info Alert -->
+                <div class="info-alert-container">
+                    <div class="info-alert">
+                        <svg
+                            class="info-icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        <p>
+                            This is a simulated chatbot for demonstration. For
+                            real mental health support, please contact UQ
+                            Student Services or call Lifeline 13 11 14.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Messages Area -->
+                <div class="messages-container" id="messagesContainer">
+                    <!-- Messages will be dynamically added here -->
+                </div>
+
+                <!-- Suggestions -->
+                <div class="suggestions-container" id="suggestionsContainer">
+                    <p class="suggestions-label">Quick suggestions:</p>
+                    <div class="suggestions-chips" id="suggestionsChips">
+                        <!-- Suggestion chips will be added here -->
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area">
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            id="messageInput"
+                            placeholder="Type your message here..."
+                            class="message-input"
+                            autocomplete="off"
+                        />
+                        <button
+                            id="sendButton"
+                            class="send-button"
+                            aria-label="Send message"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon
+                                    points="22 2 15 22 11 13 2 9 22 2"
+                                ></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="input-hint">Press Enter to send</p>
+                </div>
+            </div>
+        </div>
+
+        <script src="../JS/Script.js"></script>
+    </body>
+</html>
