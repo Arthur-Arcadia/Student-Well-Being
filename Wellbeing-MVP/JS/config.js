@@ -1,1 +1,1 @@
-window.APP_CONFIG = { googleMapsApiKey: "AIzaSyAcRcTklFw-f_NlUxmd--oPtuBmr3THQNo" };
+window.APP_CONFIG = { googleMapsApiKey: "" };
