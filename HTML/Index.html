@@ -16,7 +16,6 @@
     </head>
 
     <body>
-        <!-- ========= BEGIN: Global Header + Main Nav (paste at top of <body>) ========= -->
         <style>
             :root {
                 --indigo: #2563eb;
@@ -26,7 +25,6 @@
                 --border: #e5e7eb;
                 --bgsoft: #f3f3f5;
             }
-            /* 顶部品牌栏（避免与你现有 .topbar 命名冲突，使用独立类名） */
             .site-topbar {
                 position: sticky;
                 top: 0;
@@ -75,12 +73,10 @@
                 height: 26px;
                 stroke: var(--text);
             }
-
-            /* 第二行主导航 */
             .site-mainnav {
                 position: sticky;
                 top: 64px;
-                z-index: 99; /* 紧跟在顶部栏下方 */
+                z-index: 99; 
                 display: flex;
                 justify-content: center;
                 gap: 2rem;
@@ -100,8 +96,6 @@
             .site-mainnav a.is-active {
                 color: var(--indigo);
             }
-
-            /* 小屏优化 */
             @media (max-width: 640px) {
                 .site-topbar {
                     padding: 0.8rem 0.9rem;
@@ -125,7 +119,6 @@
                     <p class="site-sub">Your well-being companion</p>
                 </div>
             </div>
-            <!-- 用户按钮：点击去登录页（login页本身不要粘贴本模板） -->
             <button
                 class="site-userbtn"
                 aria-label="Sign in / Profile"
@@ -145,7 +138,6 @@
                 </svg>
             </button>
         </header>
-
         <nav class="site-mainnav" id="siteMainNav">
             <a href="./Home.html" data-match="home.html">Home</a>
             <a href="./Services-Explore.html" data-match="services-explore.html"
@@ -154,14 +146,11 @@
             <a href="./Self-help.html" data-match="self-help.html">Self-help</a>
             <a href="./Index.html" data-match="index.html">Chat</a>
         </nav>
-
         <script>
             (function () {
-                // 根据当前 URL 自动高亮
                 var path = (
                     location.pathname.split("/").pop() || ""
                 ).toLowerCase();
-                // 兼容没有 Home.html 时，把其它页面都当作“非 Home”，仅当匹配到 home.html 才点亮 Home
                 var links = document.querySelectorAll("#siteMainNav a");
                 var matched = false;
                 links.forEach(function (a) {
@@ -177,7 +166,6 @@
                         a.removeAttribute("aria-current");
                     }
                 });
-                // 若未匹配任何具体页，默认高亮 Home（例如站点根路径或自定义首页）
                 if (!matched) {
                     var home = document.querySelector(
                         '#siteMainNav a[data-match="home.html"]'
@@ -186,11 +174,8 @@
                 }
             })();
         </script>
-        <!-- ========= END: Global Header + Main Nav ========= -->
-
         <div class="app-container">
             <div class="chat-card">
-                <!-- Header -->
                 <div class="header">
                     <div class="header-content">
                         <div class="bot-icon-container">
@@ -238,8 +223,6 @@
                         </svg>
                     </button>
                 </div>
-
-                <!-- Info Alert -->
                 <div class="info-alert-container">
                     <div class="info-alert">
                         <svg
@@ -263,21 +246,13 @@
                         </p>
                     </div>
                 </div>
-
-                <!-- Messages Area -->
                 <div class="messages-container" id="messagesContainer">
-                    <!-- Messages will be dynamically added here -->
                 </div>
-
-                <!-- Suggestions -->
                 <div class="suggestions-container" id="suggestionsContainer">
                     <p class="suggestions-label">Quick suggestions:</p>
                     <div class="suggestions-chips" id="suggestionsChips">
-                        <!-- Suggestion chips will be added here -->
                     </div>
                 </div>
-
-                <!-- Input Area -->
                 <div class="input-area">
                     <div class="input-wrapper">
                         <input
@@ -312,7 +287,6 @@
                 </div>
             </div>
         </div>
-
         <script src="../JS/Script.js"></script>
     </body>
 </html>

@@ -7,11 +7,9 @@
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
         />
         <title>UQ Mental Guidance — Self-Help Tools</title>
-        <!-- 复用全站的柔和渐变、变量、按钮、卡片、布局等样式 -->
         <link rel="stylesheet" href="../CSS/services-explore.css" />
     </head>
     <body>
-        <!-- ========= BEGIN: Global Header + Main Nav (paste at top of <body>) ========= -->
         <style>
             :root {
                 --indigo: #2563eb;
@@ -21,7 +19,6 @@
                 --border: #e5e7eb;
                 --bgsoft: #f3f3f5;
             }
-            /* 顶部品牌栏（避免与你现有 .topbar 命名冲突，使用独立类名） */
             .site-topbar {
                 position: sticky;
                 top: 0;
@@ -71,11 +68,10 @@
                 stroke: var(--text);
             }
 
-            /* 第二行主导航 */
             .site-mainnav {
                 position: sticky;
                 top: 64px;
-                z-index: 99; /* 紧跟在顶部栏下方 */
+                z-index: 99;
                 display: flex;
                 justify-content: center;
                 gap: 2rem;
@@ -96,7 +92,6 @@
                 color: var(--indigo);
             }
 
-            /* 小屏优化 */
             @media (max-width: 640px) {
                 .site-topbar {
                     padding: 0.8rem 0.9rem;
@@ -120,7 +115,6 @@
                     <p class="site-sub">Your well-being companion</p>
                 </div>
             </div>
-            <!-- 用户按钮：点击去登录页（login页本身不要粘贴本模板） -->
             <button
                 class="site-userbtn"
                 aria-label="Sign in / Profile"
@@ -152,11 +146,9 @@
 
         <script>
             (function () {
-                // 根据当前 URL 自动高亮
                 var path = (
                     location.pathname.split("/").pop() || ""
                 ).toLowerCase();
-                // 兼容没有 Home.html 时，把其它页面都当作“非 Home”，仅当匹配到 home.html 才点亮 Home
                 var links = document.querySelectorAll("#siteMainNav a");
                 var matched = false;
                 links.forEach(function (a) {
@@ -172,7 +164,6 @@
                         a.removeAttribute("aria-current");
                     }
                 });
-                // 若未匹配任何具体页，默认高亮 Home（例如站点根路径或自定义首页）
                 if (!matched) {
                     var home = document.querySelector(
                         '#siteMainNav a[data-match="home.html"]'
@@ -181,15 +172,9 @@
                 }
             })();
         </script>
-        <!-- ========= END: Global Header + Main Nav ========= -->
-
-        <!-- 页面主体布局：左侧为功能切换，右侧为内容区（与 services-explore 的两栏布局一致） -->
         <main class="layout" role="main">
-            <!-- 左侧：功能切换区（复用 chips/按钮样式） -->
             <aside class="filters" aria-labelledby="selfhelp-title">
                 <h2 id="selfhelp-title">Tools</h2>
-
-                <!-- 功能选项：Mindfulness / Music / Podcasts / Journaling -->
                 <div class="filter-group">
                     <span class="filter-label">Choose a tool</span>
                     <div
@@ -236,8 +221,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- 正念可选时长预设 -->
                 <div class="filter-group" aria-labelledby="duration-title">
                     <span class="filter-label" id="duration-title"
                         >Mindfulness duration</span
@@ -250,8 +233,6 @@
                         <button class="chip" data-minutes="5">5 min</button>
                     </div>
                 </div>
-
-                <!-- 统一操作按钮（不同模块可按需复用） -->
                 <div class="filter-actions">
                     <button type="button" id="primaryAction" class="primary-btn">
                         Start
@@ -260,9 +241,7 @@
                         Pause
                     </button>
                 </div>
-
                 <p id="toolStatus" class="interaction-status" role="status" aria-live="polite"></p>
-                <!-- 免责声明（延续你站点的提示语气） -->
                 <div class="legend" role="note" aria-label="Safety note">
                     <h3>Note</h3>
                     <ul>
@@ -278,9 +257,7 @@
                 </div>
             </aside>
 
-            <!-- 右侧：内容展示区（与 services-explore 的 content 容器对齐） -->
             <section class="content" aria-live="polite">
-                <!-- 上半区：主内容（呼吸动画/音频/日记） -->
                 <div
                     class="map-wrap"
                     style="
@@ -289,7 +266,6 @@
                         justify-content: center;
                     "
                 >
-                    <!-- Mindfulness 面板 -->
                     <div
                         id="panel-mindfulness"
                         role="tabpanel"
@@ -301,7 +277,6 @@
                             Follow the rhythm: inhale — hold — exhale.
                         </p>
 
-                        <!-- 呼吸引导可视容器（占位） -->
                         <div
                             id="breathingVisual"
                             style="
@@ -319,7 +294,6 @@
                             <span id="breathingLabel" class="meta" role="status" aria-live="polite">Ready</span>
                         </div>
 
-                        <!-- 文本引导 -->
                         <ul class="cards" style="grid-template-columns: 1fr">
                             <li class="card">
                                 <h3>How it works</h3>
@@ -331,7 +305,6 @@
                         </ul>
                     </div>
 
-                    <!-- Music 面板 -->
                     <div
                         id="panel-music"
                         role="tabpanel"
@@ -343,7 +316,6 @@
                             Pick a track and focus softly on the sound.
                         </p>
 
-                        <!-- Music 面板 -->
                         <ul class="cards" id="musicList">
                             <li class="card">
                                 <h3>Ocean Waves</h3>
@@ -396,7 +368,6 @@
                         </ul>
                     </div>
 
-                    <!-- Podcasts 面板 -->
                     <div
                         id="panel-podcasts"
                         role="tabpanel"
@@ -408,10 +379,9 @@
                             Short episodes to learn techniques and perspectives.
                         </p>
 
-                        <!-- Podcasts 面板 -->
                         <ul class="cards" id="podcastList">
                             <li class="card">
-                                <h3>Mini-Guide: Grounding (5′)</h3>
+                                <h3>Mini-Guide: Grounding (5')</h3>
                                 <p class="meta">
                                     A quick 5-4-3-2-1 grounding walk-through.
                                 </p>
@@ -429,7 +399,7 @@
                                 </audio>
                             </li>
                             <li class="card">
-                                <h3>Study Stress Reset (7′)</h3>
+                                <h3>Study Stress Reset (7')</h3>
                                 <p class="meta">
                                     A brief body scan for exam weeks.
                                 </p>
@@ -449,7 +419,6 @@
                         </ul>
                     </div>
 
-                    <!-- Journaling 面板 -->
                     <div
                         id="panel-journaling"
                         role="tabpanel"
@@ -463,12 +432,12 @@
 
                         <ul class="cards" style="grid-template-columns: 1fr">
                             <li class="card">
-                                <h3>Today’s entry</h3>
+                                <h3>Today's entry</h3>
                                 <div
                                     class="meta"
                                     style="margin: 0.25rem 0 0.5rem"
                                 >
-                                    Prompt: What’s one thing I can control right
+                                    Prompt: Whats one thing I can control right
                                     now?
                                 </div>
                                 <label for="journalInput">Your note</label>
@@ -518,8 +487,6 @@
                         </ul>
                     </div>
                 </div>
-
-                <!-- 下半区：Tips（随主题切换） -->
                 <div class="results">
                     <div class="results-head">
                         <h2 id="tipsTitle">Tips</h2>
